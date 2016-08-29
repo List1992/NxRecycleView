@@ -33,7 +33,7 @@ public class SplashActivity extends InstrumentedActivity {
         }, 1500);
 
         //方式二
-        mHandler.sendEmptyMessageDelayed(0, 1500);
+       // mHandler.sendEmptyMessageDelayed(0, 1500);
     }
 
     //方式二
