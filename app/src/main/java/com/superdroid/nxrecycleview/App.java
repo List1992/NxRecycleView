@@ -18,6 +18,8 @@ package com.superdroid.nxrecycleview;
 import android.app.Application;
 import android.util.Log;
 
+import com.superdroid.nxrecycleview.utils.CrashHandler;
+
 import cn.jpush.android.api.JPushInterface;
 
 /**
@@ -36,8 +38,11 @@ public class App extends Application {
         }
 
         JPushInterface.setDebugMode(true);    // 设置开启日志,发布时请关闭日志
-        JPushInterface.init(this);            // 初始化 JPush
+        JPushInterface.init(instance);            // 初始化 JPush
         Log.i("tao", "JPUSH IS ONCREATE");
+
+        CrashHandler crashHandler = CrashHandler.getInstance();
+        crashHandler.init(instance);
     }
 
     public static App getInstance() {

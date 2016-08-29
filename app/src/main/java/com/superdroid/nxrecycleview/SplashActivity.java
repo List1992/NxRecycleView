@@ -21,8 +21,8 @@ public class SplashActivity extends InstrumentedActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-        // mHandler.sendEmptyMessageDelayed(0, 1000);
 
+        //方式一
         new Handler() {
         }.postDelayed(new Runnable() {
             @Override
@@ -31,8 +31,12 @@ public class SplashActivity extends InstrumentedActivity {
                 finish();
             }
         }, 1500);
+
+        //方式二
+        mHandler.sendEmptyMessageDelayed(0, 1500);
     }
 
+    //方式二
     public Handler mHandler = new Handler() {
 
         @Override

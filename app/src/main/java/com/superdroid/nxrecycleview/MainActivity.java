@@ -1,20 +1,18 @@
 package com.superdroid.nxrecycleview;
 
-import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.MultiAutoCompleteTextView;
 import android.widget.TextView;
 
+import com.superdroid.nxrecycleview.activity.TestDialogActivity;
 import com.superdroid.nxrecycleview.utils.ExampleUtil;
 import com.superdroid.nxrecycleview.utils.MyEventBus;
 import com.superdroid.nxrecycleview.utils.Toastutils;
@@ -32,6 +30,7 @@ import cn.jpush.android.api.JPushInterface;
 
 public class MainActivity extends InstrumentedActivity {
 
+    @BindView(R.id.initJpush)
     Button mInitJpush;
     @BindView(R.id.stopJpush)
     Button mStopJpush;
@@ -39,8 +38,10 @@ public class MainActivity extends InstrumentedActivity {
     Button mResumeJpush;
     @BindView(R.id.getID)
     Button mGetID;
-    @BindView(R.id.ID)
+    //    @BindView(R.id.ID)
     TextView mID;
+    @BindView(R.id.toDialog)
+    Button mToDialog;
     private long mExitTime;
     //定义字符串数组，作为提示的文本
     String[] personData = new String[]
@@ -119,7 +120,10 @@ public class MainActivity extends InstrumentedActivity {
     @Override
     protected void onResume() {
         isForeground = true;
+
         super.onResume();
+
+        Log.i("JPush", "onresume");
     }
 
 
@@ -127,6 +131,13 @@ public class MainActivity extends InstrumentedActivity {
     protected void onPause() {
         isForeground = false;
         super.onPause();
+        Log.i("JPush", "onpause");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.i("JPush", "onstop");
     }
 
     @Override
@@ -142,6 +153,12 @@ public class MainActivity extends InstrumentedActivity {
     public static final String KEY_MESSAGE = "message";
     public static final String KEY_EXTRAS = "extras";
 
+    @OnClick(R.id.toDialog)
+    public void onClick() {
+
+        startActivity(new Intent(MainActivity.this, TestDialogActivity.class));
+    }
+
     public class MessageReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -154,7 +171,7 @@ public class MainActivity extends InstrumentedActivity {
                     showMsg.append(KEY_EXTRAS + " : " + extras + "\n");
                 }
 
-               // mID.setText(showMsg.toString());
+                // mID.setText(showMsg.toString());
             }
         }
     }

@@ -57,6 +57,13 @@
             >
 
         </activity>
+
+        <activity
+            android:name=".activity.TestDialogActivity"
+            android:configChanges="orientation|keyboardHidden"
+            >|
+        </activity>
+
         <!-- Required SDK核心功能 -->
         <activity
             android:name="cn.jpush.android.ui.PushActivity"
