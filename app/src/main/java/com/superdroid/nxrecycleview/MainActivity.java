@@ -38,24 +38,11 @@ public class MainActivity extends InstrumentedActivity {
     Button mResumeJpush;
     @BindView(R.id.getID)
     Button mGetID;
-    //    @BindView(R.id.ID)
+    @BindView(R.id.ID)
     TextView mID;
     @BindView(R.id.toDialog)
     Button mToDialog;
     private long mExitTime;
-    //定义字符串数组，作为提示的文本
-    String[] personData = new String[]
-            {
-                    "Jobs",
-                    "Jobbs",
-                    "Jabc",
-                    "LABC",
-                    "Lbbc",
-                    "Madda",
-                    "macvb",
-                    "LiKaifu",
-                    "maYun"
-            };
 
     public static boolean isForeground = false;
 
@@ -110,7 +97,7 @@ public class MainActivity extends InstrumentedActivity {
             case R.id.getID:
                 String registrationID = JPushInterface.getRegistrationID(getApplicationContext());
                 if (!TextUtils.isEmpty(registrationID)) {
-
+                    //获取用户唯一标识
                     mID.setText(registrationID);
                 }
                 break;
@@ -148,6 +135,7 @@ public class MainActivity extends InstrumentedActivity {
 
     //for receive customer msg from jpush server
     private MessageReceiver mMessageReceiver;
+    //自定义广播的action
     public static final String MESSAGE_RECEIVED_ACTION = "com.example.jpushdemo.MESSAGE_RECEIVED_ACTION";
     public static final String KEY_TITLE = "title";
     public static final String KEY_MESSAGE = "message";

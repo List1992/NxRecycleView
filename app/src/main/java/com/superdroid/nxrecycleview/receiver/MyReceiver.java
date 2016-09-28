@@ -39,7 +39,8 @@ public class MyReceiver extends BroadcastReceiver {
 
         } else if (JPushInterface.ACTION_MESSAGE_RECEIVED.equals(intent.getAction())) {
             Log.d(TAG, "[MyReceiver] 接收到推送下来的自定义消息: " + bundle.getString(JPushInterface.EXTRA_MESSAGE));
-            // processCustomMessage(context, bundle);
+             //processCustomMessage(context, bundle);
+            //接收到自定义的消息之后，通过eventbus改变MainActivity中的textview
             EventBus.getDefault().post(new MyEventBus(bundle.getString(JPushInterface.EXTRA_MESSAGE)));
 
         } else if (JPushInterface.ACTION_NOTIFICATION_RECEIVED.equals(intent.getAction())) {
